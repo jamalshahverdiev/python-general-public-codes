@@ -1,0 +1,11 @@
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+ShaiqMtk->Bineqedi Base
+                 Fas 0/1           109               T    N5B-400   br0
+Bineqedi Base A 1
+                 Fas 0/1           71                T    R5T-GPS   br0
+Bineqedi_Site_SW.bvim.lan
+                 Fas 0/1           143              S I   WS-C2960C Fas 0/1
