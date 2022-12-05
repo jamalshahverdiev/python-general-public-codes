@@ -2,4 +2,4 @@
 
 #### Just edit `config.ini` file for the credentials and ports
 
-#### I don't remember real purpose of this code files but, I wrote this long time ago for the network negineers
+#### I don't remember real purpose of this code files but, I wrote this long time ago for the network engineers
