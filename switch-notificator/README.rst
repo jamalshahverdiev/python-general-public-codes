@@ -9,7 +9,7 @@ Python script to send email about MAC address changes.
 * **switchnotificator.py** - Script authenticate with in Cisco switches and compare MAC address list from **StaticMacs** file with ``outdir/MAC.result`` file. If MAC address not found then, email will be send to defined Network Administrator for the security reason.
 * **createstaticmacs.py** - Script checks **StaticMacs** file. If file exists and empty or doesn't exists it will create it.
 * **iplist** - This file must contain IP address list of Cisco switches.
-* To configure gmail settings just edit **frommail**, **fromemailpass**, **tomail** variables in the ``lib/varsfuncs.py`` file.
+* To configure gmail settings just edit **frommail**, **fromemailpass**, **tomail** variables in the ``lib/variables.py`` file.
 
 
 =====
