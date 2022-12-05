@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 from os import system
 from sys import argv, exit
-from lib.functions import *
-from lib.variables import ip_file, static_macs_file, codepath
+from lib.functions import macget, getallMACs
+from lib.variables import ip_file, static_macs_file, codepath, ssh, outputdir
 
 if len(argv) < 4:
     exit('Usage: {} switchusername switchpassword vlanID'.format(argv[0]))

@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 from os import system, path
 from sys import exit, argv
-from lib.functions import *
-from lib.variables import ip_file, codepath, static_macs_file, frommail, fromemailpass, tomail
+from lib.functions import macget, filterMAC, emailsend
+from lib.variables import ip_file, codepath, static_macs_file, frommail, fromemailpass, tomail, ssh, outputdir
 
 if path.exists(codepath+static_macs_file) and path.getsize(codepath+static_macs_file) > 0:
     pass
 else:
-    print('File "StaticMacs" does not exists or empty!!!')
-    print('To use "switchnotificator.py" script you must define static MAC address list in the "StaticMacs" file...')
-    print('If you want define static mac list then, connect all your computers to you switch devices and use "createstaticmacs.py" script!!!')
+    print("File ", static_macs_file, " does not exists or empty!!!")
+    print("To use switchnotificator.py script you must define static MAC address list in the ", static_macs_file, " file...")
+    print("If you want define static mac list then, connect all your computers to you switch devices and use createstaticmacs.py script!!!")
     exit()
 
 if len(argv) < 4:
