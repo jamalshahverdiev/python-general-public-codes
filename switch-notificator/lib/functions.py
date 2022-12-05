@@ -1,21 +1,13 @@
-import os
-import smtplib
-import paramiko
-
-codepath = os.getcwd()
-outputdir = codepath+'/outdir/'
-frommail = "from.email@gmail.com"
-fromemailpass = "from.email.password"
-tomail= "to.email@gmail.com"
-ssh = paramiko.SSHClient()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+from smtplib import SMTP
+from os import system
+from lib.variables import ssh, outputdir
 
 def emailsend(frommail, fromemailpass, tomail, mac, vlanID):
     message =  """From: From Email <{2}>
 To: To Email <{3}>
 Subject: New MAC address for VLAN {1}
 MAC address "{0}" is not founded in "StaticMacs" file""".format(mac, vlanID, frommail, tomail)
-    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server = SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login(frommail, fromemailpass)
     server.sendmail(frommail, tomail, message)
@@ -29,8 +21,8 @@ def macget(vlanID, ip):
         switchout.write(''.join(output))
 
 def filterMAC(ip, vlanID):
-    os.system('cat '+outputdir+'/'+ip+' | grep -v -i ALL | grep '+vlanID+' | awk \'{print $2 }\' >> '+outputdir+'/MAC.result')
+    system('cat '+outputdir+'/'+ip+' | grep -v -i ALL | grep '+vlanID+' | awk \'{print $2 }\' >> '+outputdir+'/MAC.result')
 
 def getallMACs(ip, vlanID):
-    os.system('cat '+outputdir+'/'+ip+' | grep -v -i ALL | grep '+vlanID+' | awk \'{print $2 }\' >> '+outputdir+'/MAC.list')
+    system('cat '+outputdir+'/'+ip+' | grep -v -i ALL | grep '+vlanID+' | awk \'{print $2 }\' >> '+outputdir+'/MAC.list')
 
