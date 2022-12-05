@@ -1,24 +1,19 @@
 #!/usr/bin/env python3
-
-import getpass
-import sys
+from sys import exit, argv
 from netmiko import ConnectHandler
 
-if len(sys.argv) < 6:
-    sys.exit('Usage: {} username password enpass first_port_number second_port_number'.format(sys.argv[0]))
+if len(argv) < 6:
+    exit('Usage: {} username password enpass first_port_number second_port_number'.format(argv[0]))
 else:
     pass
 
-#user = input('Username: ')
-#password = getpass.getpass()
-#enable_pass = getpass.getpass(prompt='Enter enable password: ')
-input_command = '{} {}'.format('show interfaces status | inc', sys.argv[4])
-output_command = '{} {}'.format('show interfaces status | inc', sys.argv[4])
-commandToNoShut = ['{} {}'.format('interface ', sys.argv[5]), 'no shutdown']
-commandToShut = ['{} {}'.format('interface ', sys.argv[5]), 'shutdown']
-user = sys.argv[1]
-password = sys.argv[2]
-enable_pass = sys.argv[3]
+input_command = '{} {}'.format('show interfaces status | inc', argv[4])
+output_command = '{} {}'.format('show interfaces status | inc', argv[4])
+commandToNoShut = ['{} {}'.format('interface ', argv[5]), 'no shutdown']
+commandToShut = ['{} {}'.format('interface ', argv[5]), 'shutdown']
+user = argv[1]
+password = argv[2]
+enable_pass = argv[3]
 devices_ip = ['192.168.20.80']
 
 for ip in devices_ip:

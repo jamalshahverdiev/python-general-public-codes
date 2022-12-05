@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-import configparser
-import getpass
-import sys
+from configparser import ConfigParser
 from netmiko import ConnectHandler
 
-config = configparser.ConfigParser()
+config = ConfigParser()
 config.read('./config.ini')
 
 for ip in [config.get('SWCREDS', 'IPS')]:
