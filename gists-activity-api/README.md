@@ -11,7 +11,7 @@ You have the following tools installed on your computer:
 ### Infrastructure deployment preparation
 - Clone repository 
 - Set GitHub Gist user names in the `check_users_activity.py` in the variable `usernames`. 
-- Set username and password login credentials in the `separated_func_file.py` file in lines `5` and `6`.
+- Set `username` and `password` login credentials in the `src/variables.py` file in lines `5` and `6`.
 - Create new `s3` bucket with the name defined in the `IaC/backend.tf` file.
 - Change `public_key_path` and `private_key_path` variables to set public and private key path of EC2 instance in the `IaC/vars.tf`.
 - Set `aws_access_key_id` and `aws_secret_access_key` variable values with the `aws configure`  command. Otherwise you need to set this variable values inside of the `IaC/terraform.tfvars` file. 
