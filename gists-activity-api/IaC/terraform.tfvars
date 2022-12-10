@@ -1,0 +1,6 @@
+AWS_ACCESS_KEY     = ""
+AWS_SECRET_KEY     = ""
+AWS_REGION         = "eu-west-1"
+INSTANCE_PASSWORD  = "Elmest@r4Ti"
+VPC_CIDR           = "10.0"
+PIPEDIVE_API_TOKEN = ""

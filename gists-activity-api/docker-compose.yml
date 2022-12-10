@@ -1,0 +1,27 @@
+version: '3'
+
+# Anchor functions
+x-volumefunc: &xvolumefunc
+  volumes:
+    - ./templates:/app/templates:cached
+
+services:
+  pythonapp:
+    container_name: pipedrive
+    labels:
+      NAME: "pipedrive"
+    restart: always
+    build: ./
+    <<: *xvolumefunc
+    ports:
+      - 8080:8080
+  cronjob:
+    container_name: cronjob
+    labels:
+      NAME: "cronjob"
+    environment:
+      PIPEDRIVE_API_TOKEN: ${API_TOKEN}
+    build:
+      context: .
+      dockerfile: cronjob/Dockerfile
+    <<: *xvolumefunc
