@@ -1,6 +1,7 @@
 FROM python:3.8-alpine
 WORKDIR /app
-COPY ["requirements.txt", "check_users_activity.py", "separated_func_file.py", "./"]
+COPY ["requirements.txt", "check_users_activity.py", "./"]
+ADD ./src ./
 RUN pip install -r requirements.txt 
 #&& chown -R nobody:nobody /app/*
 #RUN apk add --update --no-cache libcap && \

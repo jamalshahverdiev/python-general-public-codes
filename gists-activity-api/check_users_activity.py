@@ -1,24 +1,26 @@
-#!/usr/bin/env python
-import requests, json, os.path, os
-from separated_func_file import createGistStruct, replaceInFile, openFileToIterate, getGistNamesFromFile, deleteLine, postToPipeDrive, putDeletePipeDrive, getIdByTitle, createPostObjects
-
-formattedFilePath = "{}/{}".format(os.path.dirname(os.path.abspath(__file__)), 'templates/output.txt')
-userNames=['unixidzero']
-gitHubSite='https://api.github.com'
-data = {}
-url = 'https://api.pipedrive.com/v1/deals'
-headers = {'content-type': 'application/json'}
-token = os.environ.get('PIPEDRIVE_API_TOKEN')
-params = {'api_token': token }
+#!/usr/bin/env python3
+from os import path, environ
+from requests import get
+from src.functions import (
+    createGistStruct,
+    replaceInFile,
+    openFileToIterate,
+    getGistNamesFromFile,
+    deleteLine,
+    postToPipeDrive,
+    putDeletePipeDrive,
+    createPostObjects
+    ) 
+from src.variables import formattedFilePath, userNames, gitHubSite, data, url, headers, params
 
 for username in userNames:
     print("Started iteration for user: ", username)
-    filePath = "{}/{}/{}.html".format(os.path.dirname(os.path.abspath(__file__)), 'templates', username)
+    filePath = "{}/{}/{}.html".format(path.dirname(path.abspath(__file__)), 'templates', username)
     URL='{}/users/{}/gists'.format(gitHubSite,username)
-    response = requests.get(url=URL)
+    response = get(url=URL)
     gists = response.json() 
 
-    if os.path.isfile(filePath) and os.path.getsize(filePath) > 0:
+    if path.isfile(filePath) and path.getsize(filePath) > 0:
         loglist = openFileToIterate(filePath, 'read', username)
         for realGistLine in createGistStruct(gists):
             gistName = realGistLine.split('__')[1]
@@ -45,7 +47,7 @@ for username in userNames:
                 outFile.write('<br>' + '\n')
         print ("Created new GIST file for user: {}".format(username))
 
-    if os.path.isfile(filePath) and os.path.getsize(filePath) > 0:
+    if path.isfile(filePath) and path.getsize(filePath) > 0:
         unmatchedLines = []
         realGistLines = """{}""".format('\n'.join(createGistStruct(gists)[0:]))
         for fileGistLine in getGistNamesFromFile(filePath, 'readlines', username):

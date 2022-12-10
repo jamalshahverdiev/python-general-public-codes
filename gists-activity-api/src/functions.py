@@ -1,10 +1,10 @@
-import os.path, shutil, json, requests
+from requests import get, post, put
+from json import dumps
+from shutil import copyfile
+from os import remove
 from flask import make_response, request, abort
 from functools import wraps
-
-username = 'pipedrive'
-password = 'pipedrive'
-accessList = "{}/{}".format(os.getcwd(), 'templates/access_list.txt')
+from src.variables import username, password, accessList
 
 def auth_required(f):
     @wraps(f)
@@ -65,8 +65,8 @@ def deleteLine(inputFile, outputFile, stringToMatchs):
         for line in oldfile:
             if not any(bad_word in line for bad_word in stringToMatchs):
                 newfile.write(line)
-    shutil.copyfile(outputFile, inputFile)
-    os.remove(outputFile)
+    copyfile(outputFile, inputFile)
+    remove(outputFile)
 
 def replaceInFile(file_path, old_line, new_line):
     with open(file_path,'r+') as f:
@@ -82,9 +82,9 @@ def postToPipeDrive(dictObj, gistName, addTime, url, params, headers):
     dictObj['status'] = 'open'
     dictObj['org_id'] = 10000
     dictObj['value'] = 100
-    return requests.post(url, 
+    return post(url, 
                 params=params, 
-                data=json.dumps(dictObj, sort_keys=True, indent=3), 
+                data=dumps(dictObj, sort_keys=True, indent=3), 
                 headers=headers
             )
 
@@ -96,14 +96,14 @@ def putDeletePipeDrive(dictObj, gistName, state, url, params, headers):
         dictObj['status'] = 'deleted'
     else:
         dictObj['status'] = 'open'
-    return requests.put('{}/{}'.format(url, idOfDeal), 
+    return put('{}/{}'.format(url, idOfDeal), 
                     params=params, 
-                    data=json.dumps(dictObj, sort_keys=True, indent=3), 
+                    data=dumps(dictObj, sort_keys=True, indent=3), 
                     headers=headers
                 )
 
 def getIdByTitle(url, params, title):
-    response = requests.get(url, params)
+    response = get(url, params)
     for content in response.json()['data']:
         if content['title'] == title:
             return content['id']
