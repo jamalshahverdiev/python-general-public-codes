@@ -6,6 +6,7 @@ In this repository I will store multiple type of python scripts
 * `BeautifulSoup codes <https://github.com/jamalshahverdiev/python-general-codes/tree/master/beautycodes>`_
 * `Send email via Exchange <https://github.com/jamalshahverdiev/python-general-codes/tree/master/mailviaexchange>`_
 * `Switch MAC change notificator <https://github.com/jamalshahverdiev/python-general-public-codes/tree/master/switch-notificator>`_
+* `GitHub Gists activity API <https://github.com/jamalshahverdiev/python-general-public-codes/tree/master/gists-activity-api>`_
 * `Up or Down Switch port by compare state <https://github.com/jamalshahverdiev/python-general-public-codes/tree/master/switch-port-shut-noshut>`_
 * `Write description to Cisco Switch or Routers by their Hostnames of neighbor ports <https://github.com/jamalshahverdiev/python-general-public-codes/tree/master/cisco-cdp-desc-writer>`_
 * `Change destination port, from the status of the first port <https://github.com/jamalshahverdiev/python-general-codes/tree/master/switch-port-shut-noshut>`_
