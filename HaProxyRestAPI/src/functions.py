@@ -1,5 +1,7 @@
-import socket
-from flask import make_response, request, abort
+#!/usr/bin/env python3
+
+from socket import socket, AF_UNIX, SOCK_STREAM
+from flask import make_response, request
 from functools import wraps
 
 def auth_required(f):
@@ -25,16 +27,12 @@ def filter_cicd(f):
             if str(request.remote_addr).startswith(IP) or str(request.remote_addr) == IP:
                 return f(*args, **kwargs)
         return 'Your IP Is Not allowed ' + request.remote_addr
-#        if request.remote_addr == "192.168.9.70":
-#            return f(*args, **kwargs)
-#        else:
-#            return abort(403)
     return wrapped
 
-def executeCommand(commandToSend):
-    socket_open = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+def executeCommand(commandToSend, socket_file):
+    socket_open = socket(AF_UNIX, SOCK_STREAM)
     socket_open.settimeout(1)
-    socket_open.connect('/run/haproxy/admin.sock')
+    socket_open.connect(socket_file)
     socket_open.send(str.encode(commandToSend))
     file_handle = socket_open.makefile()
     data = file_handle.read().splitlines()
