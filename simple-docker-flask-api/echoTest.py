@@ -1,7 +1,6 @@
-#!/usr/bin/env python
-
-from flask import Flask, url_for, json, request
-app = Flask(__name__)
+#!/usr/bin/env python3
+from flask import json, request
+from src.variables import app, ipaddr, port_to_listen
 
 @app.route('/messages', methods = ['POST'])
 def api_message():
@@ -40,4 +39,4 @@ def api_echo():
 
 
 if __name__ == '__main__':
-    app.run(host='10.1.42.201', port=80, debug=True)
+    app.run(host=ipaddr, port=port_to_listen, debug=True)

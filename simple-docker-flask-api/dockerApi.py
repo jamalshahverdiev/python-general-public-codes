@@ -1,13 +1,11 @@
-#!/usr/bin/env python
-import sys
-import os
-from flask import Flask, url_for, json, request, Response, jsonify, make_response
-
-app = Flask(__name__)
+#!/usr/bin/env python3
+from os import popen, system
+from flask import request, jsonify
+from src.variables import app, ipaddr, port_to_listen
 
 @app.route('/getRunningContainers', methods = ['GET'])
 def api_getcontainer():
-    return jsonify(os.popen('docker ps | grep -v CONTAINER').readlines())
+    return jsonify(popen('docker ps | grep -v CONTAINER').readlines())
 
 @app.route('/createcontainer', methods = ['POST'])
 def api_createcontainer():
@@ -24,9 +22,9 @@ def api_createcontainer():
             cmd = ('docker run -d --name {} -p {}:80 {}'.format(containername, exposedPort, imagename))
 
             if imagename and containername:
-                if os.system(cmd) == 0:
+                if system(cmd) == 0:
                     print("Docker executed successful!")
-                    return (str(os.system('docker ps | grep {}'.format(containername))))
+                    return (str(system('docker ps | grep {}'.format(containername))))
                 else:
                     print("Docker run time happened somtheing wrong!")
         else:
@@ -44,10 +42,9 @@ def api_createcontainer():
 @app.route('/getcontainer', methods = ['GET'])
 def api_hello():
     if 'name' in request.args:
-        #return 'Hello ' + request.args['name']
-        return jsonify(os.popen('docker ps | grep {}$'.format(request.args['name'])).readlines())
+        return jsonify(popen('docker ps | grep {}$'.format(request.args['name'])).readlines())
     else:
         return 'To get Container status please use ?name= argument in the url.'
 
 if __name__ == '__main__':
-    app.run(host='10.1.42.201', port=80, debug=True)
+    app.run(host=ipaddr, port=port_to_listen, debug=True)
