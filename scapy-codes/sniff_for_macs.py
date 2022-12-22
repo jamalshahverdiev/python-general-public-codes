@@ -1,7 +1,7 @@
-#!/usr/bin/env python
-import logging
-logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-from scapy.all import *
+#!/usr/bin/env python3
+from logging import getLogger, ERROR
+getLogger("scapy.runtime").setLevel(ERROR)
+from scapy.all import ARP, sniff
 
 # Same thing for tcpdump: tcpdump -n -e -i em0 arp
 def arp_mon(pkt):
