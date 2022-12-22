@@ -1,27 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import smtplib
-
-user = 'smtprelayuser'
-pwd = 'Securep@$$'
-
-FROM = 'username@domain.az'
-TO = ['username@gmail.com']
-SUBJECT = 'Test email from Sales'
-TEXT = 'Testing sending mail using exchange servers'
-
-# Prepare actual message
-message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
-""" % (FROM, ", ".join(TO), SUBJECT, TEXT)
+from smtplib import SMTP
+from src.functions import send_email
+from src.variables import smtp_server_domain, user, pwd, sender, receiver, message
 
 try:
-    server = smtplib.SMTP("mail.domain.az", 25)
-    server.set_debuglevel(1)
-    server.ehlo('mail.domain.az')
-    server.esmtp_features['auth'] = 'LOGIN'
-    server.login(user, pwd)
-    server.sendmail(FROM, TO, message)
-    server.close()
-    print 'Successfully sent the mail'
+    send_email(SMTP, smtp_server_domain, user, pwd, sender, receiver, message)
 except:
-    print 'Failed to send mail'
+    print('Failed to send mail')
