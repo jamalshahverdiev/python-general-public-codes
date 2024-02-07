@@ -10,7 +10,7 @@
 
     1.4 Добавить эндпойнт **/metrics** который в prometheus-совместимом формате будет отдавать метрики по количеству обработанных **GET** и **POST** запросов
 
-2. Написать helm-chart для вашего приложения.
+2.  helm-chart для приложения.
 
     2.1 Чарт должен создавать service, deployment c томом для сохранения лог-файла или SQLite db-файла
 
@@ -22,5 +22,5 @@
 # install it
 
 ```bash
-$ helm install exness ./chart
+$ helm install company ./chart
 ```

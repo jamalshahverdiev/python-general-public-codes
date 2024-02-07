@@ -20,7 +20,7 @@ configMap:
   store: simplefile
 
 application:
-  name: exness
+  name: company
   port: 8080
   nodeselect: false
   storage:
