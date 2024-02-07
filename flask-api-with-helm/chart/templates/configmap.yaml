@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.application.name }}
+  namespace: {{ .Values.application.name }}
+data:
+  store: {{ .Values.configMap.store }}

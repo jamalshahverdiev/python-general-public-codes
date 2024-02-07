@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.application.name }}
+  namespace: {{ .Values.application.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.application.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.application.name }}
+    spec:
+      containers:
+      - name: {{ .Values.application.name }}
+        image: "{{ .Values.application.image.repository }}:{{ .Values.application.image.tag }}"
+        env:
+        - name: store
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.application.name }}
+              key: store
+        ports:
+        - containerPort: {{ .Values.application.port }}
+        {{- if .Values.application.storage.activate }}
+        volumeMounts:
+        - name: storage-volume
+          mountPath: {{ .Values.application.storage.path }}
+      volumes:
+      - name: storage-volume
+        emptyDir: {}
+        {{- end }}
+      {{- if .Values.application.nodeselect }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}

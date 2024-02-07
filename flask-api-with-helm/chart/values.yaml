@@ -1,0 +1,34 @@
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+
+resources: {}
+
+nodeSelector: 
+  kubernetes.io/hostname: worker02
+
+tolerations: []
+
+affinity: {}
+
+configMap:
+  store: simplefile
+
+application:
+  name: exness
+  port: 8080
+  nodeselect: false
+  storage:
+    activate: false
+    path: /opt
+  serviceMonitor:
+    enabled: true
+  image:
+    repository: jamalshahverdiev/company
+    pullPolicy: IfNotPresent
+    tag: "0.0.11"
