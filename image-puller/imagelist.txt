@@ -1,0 +1,5 @@
+nginx:1.25.3 
+httpd:2.4
+redis:7.0.15
+mongo:7.0.5
+velero/velero:v1.2.0
