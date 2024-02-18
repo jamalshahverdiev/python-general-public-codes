@@ -14,3 +14,4 @@ In this repository I will store multiple type of python scripts
 * `API in Flask to run container and get running containers <https://github.com/jamalshahverdiev/python-general-codes/tree/master/simple-docker-flask-api>`_
 * `Send Flask metrics to Prometheus <https://github.com/jamalshahverdiev/python-general-codes/tree/master/prometheous-metrics-flask>`_
 * `Flask API with HELM and metrics <https://github.com/jamalshahverdiev/python-general-public-codes/tree/master/flask-api-with-helm>`_
+* `Image pull and push to local registry <https://github.com/jamalshahverdiev/python-general-public-codes/tree/master/image-puller>`_
